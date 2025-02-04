@@ -1,85 +1,100 @@
-
-
-//Contar usuarios registrados, contar usuarios que tienen más de 50 puntos del siguiente objeto.
-
-const users = {
-    Alex: {
-      email: 'alex@alex.com',
-      skills: ['HTML', 'CSS', 'JavaScript'],
-      age: 20,
-      isLoggedIn: false,
-      points: 30
-    },
-    Asab: {
-      email: 'asab@asab.com',
-      skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
-      age: 25,
-      isLoggedIn: false,
-      points: 50
-    },
-    Brook: {
-      email: 'daniel@daniel.com',
-      skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux'],
-      age: 30,
-      isLoggedIn: true,
-      points: 50
-    },
-    Daniel: {
-      email: 'daniel@alex.com',
-      skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
-      age: 20,
-      isLoggedIn: false,
-      points: 40
-    },
-    John: {
-      email: 'john@john.com',
-      skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node.js'],
-      age: 20,
-      isLoggedIn: true,
-      points: 50
-    },
-    Thomas: {
-      email: 'thomas@thomas.com',
-      skills: ['HTML', 'CSS', 'JavaScript', 'React'],
-      age: 20,
-      isLoggedIn: false,
-      points: 40
-    },
-    Paul: {
-      email: 'paul@paul.com',
-      skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Express', 'React', 'Node'],
-      age: 20,
-      isLoggedIn: false,
-      points: 40
+class newUser{
+    constructor(_id,username,email,password,isLoggedIn){
+        this._id =_id,
+        this.username= username,
+        this.email=email,
+        this.password = password,
+        this.createdAt = new Date();         
+        this.isLoggedIn = isLoggedIn
     }
-  }
-
-
-
-
-// for (const user in users) {
-//     let skills =Object.values(users[user].skills);
-//     let MERN = skills.includes("JavaScript") && skills.includes("MongoDB") && skills.includes("React") && skills.includes("Node");
-//     if (MERN){
-//         console.log(user)
-//     }
-// }
-
-// const proPeople = Object.assign({},users);
-
-// const Erick = {
-//     email: 'erick@erick.com',
-//     skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'C#', 'React', 'ASP'],
-//     age: 20,
-//     isLoggedIn: true,
-//     points: 20
-// }
-// proPeople.Erick = Erick;
-
-// console.log(proPeople)
-
-for (const user in users) {
-    let datas = Object.values(users[user]);
-
-    console.log(datas)
 }
+
+
+const singUp = (_id) => {
+    for(let user in users){
+        if(_id === users[user]._id){
+            console.log('Estas registrado');
+            return;
+        }
+    }
+    console.log("No estas registrado, registrando ...")
+    if(false){
+        const user1 = new newUser(2, "JohnDoe", "johndoe@example.com", "securePassword", false);
+        console.log(user1);    
+    }
+
+    
+}
+
+const singIn = (username,password) => {
+    for(let user in users){
+        if(username === users[user].username && password === users[user].password){
+            console.log('Ingresando');
+            return;
+        }
+    }
+    console.log('Credenciales invalidas');
+
+}
+
+
+//PRODUCTS
+
+const findProductById = (productId) => products.find(product => product._id === productId);
+
+const rateProduct = (productId,userId,rate) =>{
+    //buscar el id del producto
+    const product = findProductById(productId)
+    const rating = {
+        userId: userId,
+        rate: rate
+    }
+    product.ratings.push(rating)
+}
+
+const averageRating = () => {
+    let ratingNumber=0
+    let ratingIterations=0
+    for (let product = 0; product < products.length; product++) {
+        if(products[product].ratings.length > 0){
+            for (let rate = 0; rate < products[product].ratings.length; rate++) {
+                ratingNumber +=products[product].ratings[rate].rate;
+                ratingIterations+=1;
+        
+            }
+        }
+    }
+
+    return ratingNumber/ratingIterations;
+}
+
+result = averageRating();
+console.log(result)
+
+const toggleProduct = (productId,userId) =>{
+    const product = findProductById(productId)
+    const likes = product.likes.length;
+
+    //MI LOGICA, LO QUE ENTENDÍ ERA QUE SI ALGUIEN LE HABÍA DADO LIKE SE ELIMINACE SI NADE 
+    // LE HABÍA DADO LIKE ESTE DEBIA AGG UN LIKE PERO NO TUVE EN CUENTA QUE ES UN USER
+    // if(likes > 0){
+    //     product.likes.pop()
+    // }else{
+    //     product.likes.push('like')
+    // }
+    // console.log(product)
+
+    const likeIndex = product.likes.indexOf(userId);
+    
+    if (likeIndex === -1) {
+        // User hasn't liked the product, so add the like
+        product.likes.push(userId);
+        console.log(`User ${userId} liked the product ${productId}`);
+    } else {
+        // User has already liked the product, so remove the like
+        product.likes.splice(likeIndex, 1);
+        console.log(`User ${userId} removed like from the product ${productId}`);
+    }
+}
+
+toggleProduct('eedfcf','eefamr')
