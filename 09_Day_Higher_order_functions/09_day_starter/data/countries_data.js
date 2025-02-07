@@ -1,4 +1,4 @@
-const countries = [
+ const countries = [
   {
     name: 'Afghanistan',
     capital: 'Kabul',
@@ -2011,3 +2011,8 @@ const countries = [
     currency: 'Botswana pula'
   }
 ]
+const categorizeCountries = (pattern) => {
+  return countries.filter(country => country.name.includes(pattern))
+}
+
+categorizeCountries('an')

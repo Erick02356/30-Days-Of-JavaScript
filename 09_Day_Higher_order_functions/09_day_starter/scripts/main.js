@@ -41,18 +41,32 @@ const products = [
 
 //Declare a function called getStringLists which takes an array as a parameter and then returns an array only with string items.
 // const priceWithValues = products.filter(product => typeof product.price ===  "number")
-const getStringLists = (products) => {
-    return products.filter(product => typeof product.price !== "number")
-}
+// const getStringLists = (products) => {
+//     return products.filter(product => typeof product.price !== "number")
+// }
 
-const total = numbers.reduce((acc,num) => num+acc, 0)
+// const total = numbers.reduce((acc,num) => num+acc, 0)
 
-const sentence = countries2.reduce((acc, country, index, array) => {
-    const separator = index === array.length - 1 ? ' and ' : ', ';
-    return acc + separator + country;
-  });
+// const sentence = countries2.reduce((acc, country, index, array) => {
+//     const separator = index === array.length - 1 ? ' and ' : ', ';
+//     return acc + separator + country;
+//   });
   
-  console.log(`${sentence} are north European countries.`);
+//   console.log(`${sentence} are north European countries.`);
 
 
-const someName = names.every(name => name.includes('land'));
+// const someName = names.every(name => name.includes('land'));
+
+// LVL2
+
+// const total = products.map(product => product.price).filter(price => typeof price === "number").reduce((acc,price) => price + acc,0)
+// const total = products.reduce((acc,product,index,array) => {
+//     if(typeof array[index].price === "number"){
+//         return acc+product.price;
+//     }
+//     return acc
+// },0)
+
+// console.log(total)
+
+
